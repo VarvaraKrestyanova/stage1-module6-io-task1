@@ -17,10 +17,10 @@ public class FileReader {
             while ((line = reader.readLine()) != null) {
                 arrLineData = line.split(": ");
                 switch (arrLineData[0]) {
-                    case "Name" -> name = arrLineData[1];
-                    case "Age" -> age = Integer.valueOf(arrLineData[1]);
-                    case "Email" -> email = arrLineData[1];
-                    case "Phone" -> phone = Long.valueOf(arrLineData[1]);
+                    case "Name": {name = arrLineData[1]; break;}
+                    case "Age": {age = Integer.valueOf(arrLineData[1]); break;}
+                    case "Email": {email = arrLineData[1];  break;}
+                    case "Phone": {phone = Long.valueOf(arrLineData[1]); break;}
                 }
             }
         } catch (FileNotFoundException e) {
