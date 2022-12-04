@@ -2,7 +2,6 @@ package com.epam.mjc.io;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 
@@ -10,7 +9,10 @@ public class FileReader {
 
     public Profile getDataFromFile(File file){
 
-        String name = null; Integer age = null; String email = null; Long phone = null;
+        String name = null;
+        Integer age = null;
+        String email = null;
+        Long phone = null;
         try(BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
             String[] arrLineData;
             String line;
