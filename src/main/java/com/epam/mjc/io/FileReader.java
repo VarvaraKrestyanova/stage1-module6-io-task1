@@ -8,25 +8,27 @@ import java.io.IOException;
 
 public class FileReader {
 
-    public Profile getDataFromFile(File file) {
+    public Profile getDataFromFile(File file){
 
         String name = null; Integer age = null; String email = null; Long phone = null;
         try(BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
-            String[] arrLineData = new String[2];
+            String[] arrLineData;
             String line;
             while ((line = reader.readLine()) != null) {
                 arrLineData = line.split(": ");
+
                 switch (arrLineData[0]) {
                     case "Name": {name = arrLineData[1]; break;}
                     case "Age": {age = Integer.valueOf(arrLineData[1]); break;}
                     case "Email": {email = arrLineData[1];  break;}
                     case "Phone": {phone = Long.valueOf(arrLineData[1]); break;}
+                    default: {
+                        throw new UnknownProfileKeyException(arrLineData[0]);
+                    }
                 }
             }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("The provided file is not found: " + file.getAbsolutePath(), e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (UnknownProfileKeyException | IOException e) {
+            e.printStackTrace();
         }
 
         return new Profile(name, age, email, phone);
